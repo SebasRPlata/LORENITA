@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lorenita ✦ Contenido Exclusivo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --pink: #ff4f8b;
+      --pink-light: #ff80b0;
+      --pink-glow: rgba(255,79,139,0.25);
+      --black: #0a0a0a;
+      --dark: #111116;
+      --card: #18121a;
+      --text: #f5e6ef;
+      --muted: #9a7e8a;
+      --gold: #f7c6d8;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* NOISE TEXTURE */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0.4;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      text-align: center;
+      padding: 2rem;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -200px; left: 50%;
+      transform: translateX(-50%);
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(255,79,139,0.18) 0%, transparent 70%);
+      pointer-events: none;
+      animation: pulse 4s ease-in-out infinite;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -100px; right: -100px;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(255,79,139,0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: translateX(-50%) scale(1); opacity: 1; }
+      50% { transform: translateX(-50%) scale(1.08); opacity: 0.7; }
+    }
+
+    .avatar-ring {
+      position: relative;
+      width: 160px; height: 160px;
+      margin-bottom: 2rem;
+      animation: fadeDown 0.8s ease both;
+    }
+
+    .avatar-ring::before {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      background: conic-gradient(var(--pink), #ff80b0, #ffb3cc, var(--pink));
+      animation: spin 4s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .avatar {
+      position: absolute;
+      inset: 4px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #2a1520, #1a0d15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-tag {
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--pink);
+      margin-bottom: 1rem;
+      animation: fadeUp 0.8s 0.2s ease both;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3.5rem, 10vw, 7rem);
+      line-height: 1;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #fff 30%, var(--pink-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: fadeUp 0.8s 0.3s ease both;
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      color: var(--muted);
+      max-width: 420px;
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+      animation: fadeUp 0.8s 0.4s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .cta-group {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      animation: fadeUp 0.8s 0.5s ease both;
+    }
+
+    .btn {
+      padding: 0.9rem 2rem;
+      border-radius: 50px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-primary {
+      background: var(--pink);
+      color: #fff;
+      border: none;
+      box-shadow: 0 0 30px var(--pink-glow);
+    }
+
+    .btn-primary:hover {
+      background: var(--pink-light);
+      box-shadow: 0 0 50px rgba(255,79,139,0.5);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--pink);
+      color: var(--pink);
+      transform: translateY(-2px);
+    }
+
+    /* SCROLL INDICATOR */
+    .scroll-hint {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--muted);
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      animation: fadeUp 1s 1s ease both;
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 50px;
+      background: linear-gradient(to bottom, var(--pink), transparent);
+      animation: scrollLine 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollLine {
+      0%, 100% { transform: scaleY(1); opacity: 1; }
+      50% { transform: scaleY(0.5); opacity: 0.4; }
+    }
+
+    /* SECTION */
+    section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5rem 2rem;
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--pink);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+    }
+
+    /* ABOUT */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .about-img-box {
+      position: relative;
+    }
+
+    .about-img-placeholder {
+      width: 100%;
+      aspect-ratio: 3/4;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #2a1520, #1a0d15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 6rem;
+      border: 1px solid rgba(255,79,139,0.2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-img-placeholder::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 60% 40%, rgba(255,79,139,0.15), transparent 60%);
+    }
+
+    .about-badge {
+      position: absolute;
+      bottom: -20px; right: -20px;
+      background: var(--pink);
+      color: #fff;
+      padding: 1rem 1.5rem;
+      border-radius: 16px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      box-shadow: 0 10px 30px var(--pink-glow);
+    }
+
+    .about-text p {
+      color: var(--muted);
+      line-height: 1.9;
+      margin-bottom: 1.5rem;
+      font-size: 1.05rem;
+    }
+
+    .stats {
+      display: flex;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .stat {
+      border-left: 2px solid var(--pink);
+      padding-left: 1rem;
+    }
+
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      color: var(--pink);
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    /* CONTENT PREVIEW */
+    .gallery-section {
+      background: var(--dark);
+      border-top: 1px solid rgba(255,79,139,0.1);
+      border-bottom: 1px solid rgba(255,79,139,0.1);
+      padding: 5rem 0;
+    }
+
+    .gallery-section > section { padding-top: 0; padding-bottom: 0; }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .gallery-card {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      cursor: pointer;
+      group: true;
+    }
+
+    .gallery-card-inner {
+      aspect-ratio: 2/3;
+      background: linear-gradient(135deg, #2a1520, #1a0d15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3.5rem;
+      transition: transform 0.4s ease;
+      border: 1px solid rgba(255,79,139,0.1);
+    }
+
+    .gallery-card:hover .gallery-card-inner {
+      transform: scale(1.04);
+    }
+
+    .gallery-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 60%);
+      display: flex;
+      align-items: flex-end;
+      padding: 1.5rem;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .gallery-card:hover .gallery-card-overlay {
+      opacity: 1;
+    }
+
+    .gallery-lock {
+      position: absolute;
+      top: 1rem; right: 1rem;
+      background: rgba(255,79,139,0.9);
+      border-radius: 50%;
+      width: 36px; height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      backdrop-filter: blur(4px);
+    }
+
+    .gallery-card-label {
+      font-size: 0.85rem;
+      color: #fff;
+    }
+
+    /* CATEGORIES */
+    .cats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin: 2rem 0;
+    }
+
+    .cat-pill {
+      background: rgba(255,79,139,0.08);
+      border: 1px solid rgba(255,79,139,0.25);
+      color: var(--pink-light);
+      padding: 0.5rem 1.2rem;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .cat-pill:hover, .cat-pill.active {
+      background: var(--pink);
+      color: #fff;
+      border-color: var(--pink);
+    }
+
+    /* PRICING */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .price-card {
+      background: var(--card);
+      border: 1px solid rgba(255,79,139,0.12);
+      border-radius: 20px;
+      padding: 2rem;
+      text-align: center;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .price-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--pink), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .price-card:hover {
+      border-color: rgba(255,79,139,0.4);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(255,79,139,0.1);
+    }
+
+    .price-card:hover::before { opacity: 1; }
+
+    .price-card.featured {
+      border-color: var(--pink);
+      background: linear-gradient(135deg, #250d1a, #1a0d15);
+    }
+
+    .price-card.featured::before { opacity: 1; }
+
+    .featured-badge {
+      position: absolute;
+      top: 1rem; right: 1rem;
+      background: var(--pink);
+      color: #fff;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.7rem;
+      border-radius: 50px;
+    }
+
+    .price-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+
+    .price-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .price-desc {
+      color: var(--muted);
+      font-size: 0.85rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .price-amount {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      color: var(--pink);
+      margin-bottom: 1.5rem;
+    }
+
+    .price-amount span {
+      font-size: 1rem;
+      color: var(--muted);
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .price-features {
+      list-style: none;
+      text-align: left;
+      margin-bottom: 2rem;
+    }
+
+    .price-features li {
+      padding: 0.4rem 0;
+      color: var(--muted);
+      font-size: 0.85rem;
+      display: flex;
+      gap: 0.5rem;
+      align-items: flex-start;
+    }
+
+    .price-features li::before {
+      content: '✦';
+      color: var(--pink);
+      font-size: 0.6rem;
+      margin-top: 0.3rem;
+      flex-shrink: 0;
+    }
+
+    /* REDES */
+    .redes-section {
+      background: linear-gradient(135deg, rgba(255,79,139,0.05), transparent);
+      border-radius: 30px;
+      border: 1px solid rgba(255,79,139,0.1);
+      padding: 4rem;
+      text-align: center;
+      margin: 2rem auto;
+      max-width: 1100px;
+    }
+
+    .redes-grid {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 2.5rem;
+      flex-wrap: wrap;
+    }
+
+    .red-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      background: var(--card);
+      border: 1px solid rgba(255,79,139,0.15);
+      border-radius: 20px;
+      padding: 2.5rem 3rem;
+      text-decoration: none;
+      color: var(--text);
+      transition: all 0.3s ease;
+      min-width: 200px;
+    }
+
+    .red-card:hover {
+      border-color: var(--pink);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px rgba(255,79,139,0.15);
+      color: var(--pink);
+    }
+
+    .red-icon {
+      font-size: 3rem;
+      line-height: 1;
+    }
+
+    .red-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+    }
+
+    .red-handle {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .red-arrow {
+      font-size: 1.2rem;
+      transition: transform 0.3s;
+    }
+
+    .red-card:hover .red-arrow { transform: translateX(4px); }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.05);
+      text-align: center;
+      padding: 3rem 2rem;
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    footer strong {
+      font-family: 'Playfair Display', serif;
+      color: var(--pink);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .redes-section { padding: 2.5rem 1.5rem; }
+      .redes-grid { gap: 1rem; }
+      .stats { gap: 1.5rem; }
+      .about-badge { bottom: -10px; right: 0; font-size: 0.75rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══ HERO ═══ -->
+  <div class="hero">
+    <div class="avatar-ring">
+      <div class="avatar">🌸</div>
+    </div>
+    <p class="hero-tag">✦ Contenido Exclusivo ✦</p>
+    <h1 class="hero-title">Lorenita</h1>
+    <p class="hero-sub">Fotos íntimas, lifestyle y contenido especial solo para quienes saben apreciar lo auténtico.</p>
+    <div class="cta-group">
+      <a href="#paquetes" class="btn btn-primary">💖 Ver Paquetes</a>
+      <a href="#redes" class="btn btn-outline">📲 Mis Redes</a>
+    </div>
+    <div class="scroll-hint">
+      <div class="scroll-line"></div>
+      <span>scroll</span>
+    </div>
+  </div>
+
+  <!-- ═══ SOBRE MÍ ═══ -->
+  <section>
+    <div class="about-grid">
+      <div class="about-img-box">
+        <div class="about-img-placeholder">🌸</div>
+        <div class="about-badge">✦ Contenido Real & Auténtico</div>
+      </div>
+      <div class="about-text">
+        <p class="section-label">Sobre mí</p>
+        <h2 class="section-title">Hola, soy <em>Lorenita</em></h2>
+        <p>Soy una chica real que disfruta compartir su lado más íntimo y auténtico. Aquí encontrarás fotos exclusivas mías — desde lifestyle hasta contenido más especial que no encontrarás en ningún otro lugar.</p>
+        <p>Cada foto la tomo pensando en ti. Me gusta mantener una relación cercana con las personas que me apoyan. Aquí no hay filtros excesivos, solo yo siendo yo.</p>
+        <div class="stats">
+          <div class="stat">
+            <div class="stat-num">100%</div>
+            <div class="stat-label">Contenido propio</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">Real</div>
+            <div class="stat-label">Sin revendedores</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">💬</div>
+            <div class="stat-label">Atención personalizada</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ GALERÍA (PREVIEW) ═══ -->
+  <div class="gallery-section">
+    <section>
+      <p class="section-label">Contenido disponible</p>
+      <h2 class="section-title">Un vistazo de lo que te espera</h2>
+
+      <div class="cats">
+        <span class="cat-pill active">Todo</span>
+        <span class="cat-pill">Lifestyle</span>
+        <span class="cat-pill">Outfits</span>
+        <span class="cat-pill">Fetiches</span>
+        <span class="cat-pill">Especial</span>
+        <span class="cat-pill">Personalizado</span>
+      </div>
+
+      <div class="gallery-grid">
+        <div class="gallery-card">
+          <div class="gallery-card-inner">🌸</div>
+          <div class="gallery-lock">🔒</div>
+          <div class="gallery-card-overlay"><span class="gallery-card-label">Contenido Premium</span></div>
+        </div>
+        <div class="gallery-card">
+          <div class="gallery-card-inner">💋</div>
+          <div class="gallery-lock">🔒</div>
+          <div class="gallery-card-overlay"><span class="gallery-card-label">Fotos Especiales</span></div>
+        </div>
+        <div class="gallery-card">
+          <div class="gallery-card-inner">🥀</div>
+          <div class="gallery-lock">🔒</div>
+          <div class="gallery-card-overlay"><span class="gallery-card-label">Exclusivo</span></div>
+        </div>
+        <div class="gallery-card">
+          <div class="gallery-card-inner">✨</div>
+          <div class="gallery-lock">🔒</div>
+          <div class="gallery-card-overlay"><span class="gallery-card-label">Lifestyle</span></div>
+        </div>
+        <div class="gallery-card">
+          <div class="gallery-card-inner">🖤</div>
+          <div class="gallery-lock">🔒</div>
+          <div class="gallery-card-overlay"><span class="gallery-card-label">Dark Edition</span></div>
+        </div>
+        <div class="gallery-card">
+          <div class="gallery-card-inner">💎</div>
+          <div class="gallery-lock">🔒</div>
+          <div class="gallery-card-overlay"><span class="gallery-card-label">VIP</span></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ═══ PAQUETES ═══ -->
+  <section id="paquetes">
+    <p class="section-label">Precios</p>
+    <h2 class="section-title">Elige tu paquete</h2>
+
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="price-icon">🌸</div>
+        <div class="price-name">Básico</div>
+        <div class="price-desc">Ideal para empezar. Fotos de lifestyle y outfits exclusivos.</div>
+        <div class="price-amount">$X <span>/ paquete</span></div>
+        <ul class="price-features">
+          <li>10 fotos seleccionadas</li>
+          <li>Temática lifestyle / outfit</li>
+          <li>Entrega por WhatsApp</li>
+        </ul>
+        <a href="#redes" class="btn btn-outline" style="width:100%;justify-content:center;">Contactar</a>
+      </div>
+
+      <div class="price-card featured">
+        <div class="featured-badge">Popular</div>
+        <div class="price-icon">💋</div>
+        <div class="price-name">Premium</div>
+        <div class="price-desc">Contenido más especial e íntimo. El favorito de mis seguidores.</div>
+        <div class="price-amount">$X <span>/ paquete</span></div>
+        <ul class="price-features">
+          <li>25 fotos premium</li>
+          <li>Temática a elección</li>
+          <li>Incluye temática de fetiches</li>
+          <li>Atención personalizada</li>
+          <li>Entrega por WhatsApp</li>
+        </ul>
+        <a href="#redes" class="btn btn-primary" style="width:100%;justify-content:center;">Lo quiero 💖</a>
+      </div>
+
+      <div class="price-card">
+        <div class="price-icon">👑</div>
+        <div class="price-name">VIP</div>
+        <div class="price-desc">Experiencia completamente personalizada. Tú decides el contenido.</div>
+        <div class="price-amount">$X <span>/ sesión</span></div>
+        <ul class="price-features">
+          <li>Fotos personalizadas</li>
+          <li>Temática 100% a tu gusto</li>
+          <li>Contenido exclusivo único</li>
+          <li>Atención prioritaria</li>
+        </ul>
+        <a href="#redes" class="btn btn-outline" style="width:100%;justify-content:center;">Preguntar</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ REDES SOCIALES ═══ -->
+  <div id="redes" style="padding: 0 2rem;">
+    <div class="redes-section">
+      <p class="section-label">Encuéntrame aquí</p>
+      <h2 class="section-title">Mis Redes</h2>
+      <p style="color:var(--muted); max-width:450px; margin:0 auto; line-height:1.8;">
+        Sígueme en TikTok para contenido gratuito, o escríbeme directo por WhatsApp para adquirir tus paquetes exclusivos.
+      </p>
+
+      <div class="redes-grid">
+        <a href="https://tiktok.com/@lorenita" target="_blank" class="red-card">
+          <div class="red-icon">🎵</div>
+          <div class="red-name">TikTok</div>
+          <div class="red-handle">@lorenita</div>
+          <div class="red-arrow">→</div>
+        </a>
+
+        <a href="https://wa.me/TUNUMERO" target="_blank" class="red-card">
+          <div class="red-icon">💬</div>
+          <div class="red-name">WhatsApp</div>
+          <div class="red-handle">Escríbeme directo</div>
+          <div class="red-arrow">→</div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer>
+    <p>Hecho con 💖 por <strong>Lorenita</strong></p>
+    <p style="margin-top:0.5rem;">Todo el contenido es propio y exclusivo. © 2026</p>
+  </footer>
+
+  <script>
+    // Pills interactivos
+    document.querySelectorAll('.cat-pill').forEach(pill => {
+      pill.addEventListener('click', () => {
+        document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+      });
+    });
+
+    // Fade-in on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.price-card, .gallery-card, .red-card, .about-grid').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(30px)';
+      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      observer.observe(el);
+    });
+  </script>
+
+</body>
+</html>
